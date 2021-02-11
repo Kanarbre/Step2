@@ -1,5 +1,6 @@
 from primitive import AesLike
 from itertools import product as itp
+import time
 
 shift_rows = [0, 1, 2, 3, 7, 4, 5, 6, 10, 11, 8, 9, 13, 14, 15, 12]
 
@@ -72,6 +73,10 @@ if __name__ == "__main__":
         G[i] = temp
         assert (len(G[i]) == 16 * n)
 
+    file = open("results.txt", "a")
+    file.write("Starting time : " + str(time.time())+"\n")
+    file.close()
+
     skinny128 = Skinny(n, "skinny_sbox4.pkl")
     skinny128.model.setParam("LogToConsole", 0)
     skinny128.model.setParam("OutputFlag", 1)
@@ -79,7 +84,7 @@ if __name__ == "__main__":
 
     output = skinny128.differential_trail_search(G[0])
     file = open("results.txt", "a")
-    file.write(output)
+    file.write(output + "\nFinish time : " + str(time.time())+"\n")
     file.close()
 
 

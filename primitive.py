@@ -443,7 +443,6 @@ class AesLike(Primitive):
         )
         local_constraints.append(lc)
 
-        self.model.Params.Threads = 72
         self.model.optimize()
 
         # Parsing results
